@@ -9,6 +9,3 @@ def discrete_mod_fast(a,b,p):
 		c=(c*a)%p
 	return c
 
-if __name__=="__main__":
-	print discrete_mod(7,5,4)
-	print discrete_mod_fast(7,5,4)
