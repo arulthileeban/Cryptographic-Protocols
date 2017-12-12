@@ -12,6 +12,13 @@ def gen_pubkey():
 	Q=random.choice(primes_list)
 	n=P*Q
 	e=random.randint(2,n-1)
-	return n,e
+	return P,Q,n,e
 
-gen_pubkey()
+def gen_prikey(P,Q,e):
+	k=random.randint(1,1000)
+	euler_fn=(P-1)*(Q-1)
+	d=(k*euler_fn+1)/e
+	return d
+
+(P,Q,n,e) = gen_pubkey()
+d = gen_prikey(P,Q,e)
