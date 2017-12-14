@@ -1,4 +1,5 @@
 import random
+import timeit
 def primes(n):
     sieve = [True] * n
     for i in xrange(3,int(n**0.5)+1,2):
@@ -20,5 +21,8 @@ def gen_prikey(P,Q,e):
 	d=(k*euler_fn+1)/e
 	return d
 
-(P,Q,n,e) = gen_pubkey()
-d = gen_prikey(P,Q,e)
+def get_pair():
+	(P,Q,n,e) = gen_pubkey()
+	d = gen_prikey(P,Q,e)
+	
+print(timeit.timeit("get_pair()","from __main__ import get_pair", number = 1))
