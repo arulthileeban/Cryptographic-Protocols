@@ -3,9 +3,12 @@ import timeit
 import getpass
 import string
 values = dict()
-
+P=0
+Q=0
+n=0
+e=0
 for index, letter in enumerate(string.ascii_lowercase):
-   values[letter] = index + 1
+    values[letter] = index+1
 
 def primes(n):
     sieve = [True] * n
@@ -29,12 +32,21 @@ def gen_prikey(P,Q,e):
 	return d
 
 def get_pair():
-	(P,Q,n,e) = gen_pubkey()
-	d = gen_prikey(P,Q,e)
+    global P,Q,n,e
+    (P,Q,n,e) = gen_pubkey()
+    d = gen_prikey(P,Q,e)
+    return d
 
-print(timeit.timeit("get_pair()","from __main__ import get_pair", number = 1))
+def get_time():
+    print(timeit.timeit("get_pair()","from __main__ import get_pair", number = 1))
 
 def encode():
+    global P,Q,n,e
     data=getpass.getpass()
-    for
-    c = data**e%n
+    fin_pwd=""
+    for letter in data:
+        print int(values[letter])
+        fin_pwd+=str((int(values[letter])**e)%n)
+    print fin_pwd
+
+encode()
