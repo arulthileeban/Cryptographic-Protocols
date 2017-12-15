@@ -3,10 +3,6 @@ import timeit
 import getpass
 import string
 values = dict()
-P=0
-Q=0
-n=0
-e=0
 for index, letter in enumerate(string.ascii_lowercase):
     values[letter] = index+1
 
@@ -32,7 +28,6 @@ def gen_prikey(P,Q,e):
 	return d
 
 def get_pair():
-    global P,Q,n,e
     (P,Q,n,e) = gen_pubkey()
     d = gen_prikey(P,Q,e)
     return d
@@ -45,8 +40,19 @@ def encode():
     data=getpass.getpass()
     fin_pwd=""
     for letter in data:
-        print int(values[letter])
-        fin_pwd+=str((int(values[letter])**e)%n)
-    print fin_pwd
+        print values[letter],e
+        fin_pwd+=str((int(values[letter])**e)%n)+"|"
+    return fin_pwd
 
-encode()
+def decode(enc):
+    global P,Q,n,e
+    d=gen_prikey(P,Q,e)
+    fin_code=""
+    for i in enc.strip().split("|")[:-1]:
+        fin_code+=str((int(i)**d)%n)
+    print fin_code
+
+
+(P,Q,n,e) = gen_pubkey()
+c=encode()
+decode(c)
